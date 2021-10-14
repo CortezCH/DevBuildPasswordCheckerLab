@@ -41,7 +41,7 @@ namespace DevBuildPasswordRegistrationLab
                     break;
                 case "2":
                     //Call Method for checking user exists
-                    UserExists(ref usernames, ref passwords);
+                    UserExists(usernames, passwords);
                     break;
                 default:
                     Console.WriteLine("Invalid choise. Please try again.");
@@ -223,7 +223,7 @@ namespace DevBuildPasswordRegistrationLab
             return true;
         }
 
-        public static void UserExists(ref List<string> usernames, ref List<string> passwords) //TODO
+        public static void UserExists(List<string> usernames, List<string> passwords) //TODO
         {
             
             string userAttempt = GetUserInput("Username: ");

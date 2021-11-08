@@ -5,7 +5,7 @@ namespace DevBuildPasswordRegistrationLab
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void LoopProgram()
         {
             // Initialize two lists: userNames passwords
             List<string> usernames = new List<string>();
@@ -24,7 +24,7 @@ namespace DevBuildPasswordRegistrationLab
 
                 keepGoing = NewUser();
             }
-            
+
 
             Console.WriteLine("Hello World!");
         }
@@ -71,13 +71,13 @@ namespace DevBuildPasswordRegistrationLab
                 "\n-At least one number" +
                 "\n-At least minimum 7 characters" +
                 "\n-A maximum of 12 characters" +
-                "\n"+ @"Any of the following special characters: ! @ # $ % ^ & *" +
+                "\n" + @"Any of the following special characters: ! @ # $ % ^ & *" +
                 "\nPassword: ");
 
             // Check if password is valid.
             // Check user name is valid and available.
             //If username and passowrd is valid, enter into username and password list
-            if ( ValidUser(user, desiredUser, desiredPass) 
+            if (ValidUser(user, desiredUser, desiredPass)
                 && UserAvailable(user, desiredUser)
                 && ValidPassword(desiredPass))
             {
@@ -119,14 +119,14 @@ namespace DevBuildPasswordRegistrationLab
                 }
             }
 
-            foreach(char letter in desiredPass)
+            foreach (char letter in desiredPass)
             {
                 if (char.IsUpper(letter)) { hasUpperLetter = true; }
                 if (char.IsLower(letter)) { hasLowerLetter = true; }
-                if (char.IsNumber(letter)) { hasNumber = true; }
+                if (char.IsDigit(letter)) { hasNumber = true; } //changed from IsNumber to IsDigit to recognize at least one numerical entry
             }
 
-            Console.WriteLine("Upper "+ hasUpperLetter);
+            Console.WriteLine("Upper " + hasUpperLetter);
             Console.WriteLine("Upper " + hasLowerLetter);
             Console.WriteLine("Upper " + hasNumber);
 
@@ -173,7 +173,7 @@ namespace DevBuildPasswordRegistrationLab
             string[] forbidden = { "IronMan", "DevBuild", $"{desiredPass}" };
             int letterCount = 0;
 
-            foreach(char letter in desiredUser)
+            foreach (char letter in desiredUser)
             {
                 if (char.IsLetter(letter))
                 {
@@ -187,18 +187,19 @@ namespace DevBuildPasswordRegistrationLab
                 return false;
 
             }
-            else  if(desiredUser.Length > 12)
+            else if (desiredUser.Length > 12)
             {
                 Console.WriteLine("Your Username must not be longer than 12 characters");
                 return false;
-            }else if (letterCount < 5)
+            }
+            else if (letterCount < 5)
             {
                 Console.WriteLine("Your username must contain at least 5 letters");
                 return false;
             }
 
 
-            foreach(string forbid in forbidden)
+            foreach (string forbid in forbidden)
             {
                 if (desiredUser.Contains(forbid))
                 {
@@ -212,7 +213,7 @@ namespace DevBuildPasswordRegistrationLab
 
         public static bool UserAvailable(List<string> usernames, string desiredUser)
         {
-            foreach(string user in usernames)
+            foreach (string user in usernames)
             {
                 if (user == desiredUser)
                 {
@@ -225,13 +226,13 @@ namespace DevBuildPasswordRegistrationLab
 
         public static void UserExists(List<string> usernames, List<string> passwords) //TODO
         {
-            
+
             string userAttempt = GetUserInput("Username: ");
             string passAttempt = GetUserInput("Password: ");
 
             if (usernames.IndexOf(userAttempt) != -1)
             {
-                if (passAttempt == passwords[usernames.IndexOf(userAttempt)] )
+                if (passAttempt == passwords[usernames.IndexOf(userAttempt)])
                 {
                     Console.WriteLine("You have succesfully logged in!");
                 }
@@ -244,7 +245,7 @@ namespace DevBuildPasswordRegistrationLab
             {
                 Console.WriteLine("The username you entered is invalid. please try again");
             }
-            
+
 
         }
 
